@@ -14,7 +14,6 @@ tags:
   - PVE
   - OpenWrt
 # nolastmod: true
-draft: true
 ---
  
 本文简述博主的家里云和家庭网络配置，每个部分有单独的文章详细说明，可跳转查看
