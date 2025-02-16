@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="zh-Hans"
+  x-data
+  :class="$store.darkMode.class()"
+  :data-theme="$store.darkMode.theme()">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家里云和家庭网络配置教程 | DongShaoNB&#39;s Blog</title>
+
+    
+  
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>❤️</text></svg>"></link>
+  
+
+
+<link rel="canonical" href="http://localhost:1313/posts/%E5%AE%B6%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" />
+
+
+
+<meta name="author" content="DongShaoNB" />
+<meta name="description" content="本文简述博主的家里云和家庭网络配置，每个部分有单独的文章详细说明，可跳转查看
+" />
+
+
+<meta name="keywords" content="PVE,OpenWrt">
+
+
+
+<meta name="generator" content="Hugo 0.143.1">
+
+
+<meta property="og:url" content="http://localhost:1313/posts/%E5%AE%B6%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/">
+  <meta property="og:site_name" content="DongShaoNB&#39;s Blog">
+  <meta property="og:title" content="家里云和家庭网络配置教程">
+  <meta property="og:description" content="本文简述博主的家里云和家庭网络配置，每个部分有单独的文章详细说明，可跳转查看">
+  <meta property="og:locale" content="zh_Hans">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-16T16:41:58+08:00">
+    <meta property="article:modified_time" content="2025-02-16T16:41:58+08:00">
+    <meta property="article:tag" content="PVE">
+    <meta property="article:tag" content="OpenWrt">
+    <meta property="og:image" content="http://localhost:1313/posts/%E5%AE%B6%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/proxmox_logo.png">
+
+
+
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/posts/%E5%AE%B6%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/proxmox_logo.png">
+  <meta name="twitter:title" content="家里云和家庭网络配置教程">
+  <meta name="twitter:description" content="本文简述博主的家里云和家庭网络配置，每个部分有单独的文章详细说明，可跳转查看">
+
+
+
+
+<link rel="stylesheet" href="/css/output.css" />
+
+
+
+
+    
+
+
+<link rel="stylesheet" data-custom-syntax-highlighting />
+<style>
+  .chroma {
+    padding: 1em;
+    background-color: var(--dream-pre-bg, #f5f5f5);
+    border-radius: .5em;
+    overflow: auto;
+  }
+
+  html.dark .chroma {
+    background-color: var(--dream-pre-bg-dark, #262626);
+  }
+</style>
+
+
+
+
+
+
+
+
+
+    
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
+  <body x-data="{
+    flip: false,
+  }">
+    
+    <div id="dream-global-bg"></div>
+
+    
+<nav x-data="{ isSticky: false }"
+  x-init="window.addEventListener('scroll', () => { isSticky = window.scrollY > 30 })"
+  class="sticky top-0 z-30 mt-4 lg:mt-8 py-4"
+  :class="{ 'bg-base-100 shadow-lg dark:border-b dark:border-base-content/30': isSticky }">
+
+  
+  <div class="container flex justify-between px-4">
+  
+    <section class="flex items-center gap-4">
+      <div class="avatar cursor-pointer hover:online" @click="flip = !flip" title="翻转一下！">
+        <div class="h-10 rounded-full">
+          <img src="/avatar.jpg" alt="DongShaoNB&#39;s Blog" />
+        </div>
+      </div>
+
+      
+      <div>
+        
+        <a href="http://localhost:1313/" class="text-lg font-semibold cursor-pointer">
+          DongShaoNB&#39;s Blog
+        </a>
+        
+        
+        <div class="text-base-content/60 text-sm">喜欢就坚持下去吧！</div>
+        
+      </div>
+      
+    </section>
+
+    <div class="dropdown dropdown-end sm:hidden">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-square" aria-label="Select an option">
+        <ion-icon name="menu" class="text-2xl"></ion-icon>
+      </div>
+      <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-md">
+        
+
+
+<li>
+  <div role="link" tabindex="0" class="inline-flex items-center p-2 cursor-pointer" @click="flip = !flip" title="关于">
+    <ion-icon name="information-circle"></ion-icon>关于</div>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+  <a class="group inline-flex items-center p-2 cursor-pointer" href="/search" title="搜索">
+    <ion-icon name="search"></ion-icon>
+    搜索
+  </a>
+</li>
+
+
+
+
+
+
+
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="https://github.com/DongShaoNB/MyBlog" target="_blank" title="GitHub">
+    
+    <ion-icon name="logo-github"></ion-icon>
+    
+    GitHub
+  </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </ul>
+    </div>
+    <section class="hidden sm:flex sm:items-center sm:gap-2 md:gap-4">
+      
+      
+      
+      <div role="link" tabindex="0"
+        class="text-sm font-semibold cursor-pointer hover:underline"
+        @click="flip = !flip"
+        title="关于"
+      >关于</div>
+      
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      
+      
+      
+<a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="/search" title="搜索">
+  <ion-icon class="group-hover:text-primary-content" name="search"></ion-icon>
+</a>
+
+
+      
+      
+
+
+
+  
+  <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" href="https://github.com/DongShaoNB/MyBlog" target="_blank" title="GitHub">
+    <ion-icon class="group-hover:text-primary-content" name="logo-github"></ion-icon>
+  </a>
+  
+
+
+
+      
+
+      <div class="dropdown dropdown-end dropdown-hover">
+        <div tabindex="0" role="button" class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary" aria-label="Select an option">
+          <ion-icon class="group-hover:text-primary-content text-xl" name="menu"></ion-icon>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu w-36 bg-base-100 rounded-box z-[1] shadow-xl">
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/categories" title="所有分类">
+    <ion-icon name="grid"></ion-icon>
+    所有分类
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/tags" title="所有标签">
+    <ion-icon name="pricetags"></ion-icon>
+    所有标签
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/posts" title="归档">
+    <ion-icon name="archive"></ion-icon>
+    归档
+  </a>
+</li>
+
+
+          
+          
+<li>
+  <a class="inline-flex items-center p-2 cursor-pointer" href="/index.xml" title="RSS">
+    <ion-icon name="logo-rss"></ion-icon>
+    RSS
+  </a>
+</li>
+
+
+          
+
+          
+          
+
+
+
+
+
+
+
+
+
+
+          
+        </ul>
+      </div>
+      
+    </section>
+  </div>
+</nav>
+
+
+    <div class="flip-container" :class="{ 'flip-it': flip }">
+      <div class="flipper">
+        <div class="front">
+          <div class="container">
+            
+<div class="lg:grid lg:grid-cols-4 gap-4 mt-4 px-4">
+  <div class="hidden lg:block">
+    
+  </div>
+
+  <div class="lg:col-span-2">
+    <article class="mx-auto prose prose-quoteless dark:prose-invert" id="dream-single-post-main" itemscope itemtype="http://schema.org/Article">
+      
+  <meta itemprop="name" content="家里云和家庭网络配置教程">
+  <meta itemprop="description" content="本文简述博主的家里云和家庭网络配置，每个部分有单独的文章详细说明，可跳转查看">
+  <meta itemprop="datePublished" content="2025-02-16T16:41:58+08:00">
+  <meta itemprop="dateModified" content="2025-02-16T16:41:58+08:00">
+  <meta itemprop="wordCount" content="492">
+  <meta itemprop="image" content="http://localhost:1313/posts/%E5%AE%B6%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/proxmox_logo.png">
+  <meta itemprop="keywords" content="PVE,OpenWrt">
+
+      <header>
+        <h1 itemprop="headline">家里云和家庭网络配置教程</h1>
+        <p class="text-sm">
+          
+            <span data-format="luxon">2025-02-16T16:41:58&#43;08:00</span>
+          
+
+          | <span>1分钟阅读</span>
+
+          
+          | <span>更新于
+            
+              <span data-format="luxon">2025-02-16T16:41:58&#43;08:00</span>
+            </span>
+          
+        </p>
+
+        
+        <div class="flex justify-between">
+          
+            <div class="flex items-center">
+  
+  <span>@</span>
+  
+
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+  
+    
+      <span itemprop="name">DongShaoNB</span>
+    
+  
+  </span>
+</div>
+
+          
+
+          <div class="flex items-center gap-2">
+  
+  
+
+  
+  
+  
+  
+    
+  
+  
+    <a class="group inline-flex items-center p-2 rounded-full cursor-pointer hover:bg-primary"
+      href="https://x.com/intent/post?text=%e5%ae%b6%e9%87%8c%e4%ba%91%e5%92%8c%e5%ae%b6%e5%ba%ad%e7%bd%91%e7%bb%9c%e9%85%8d%e7%bd%ae%e6%95%99%e7%a8%8b&amp;url=http://localhost:1313/posts/%E5%AE%B6%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" target="_blank" rel="noopener noreferrer"
+      title="Share on X">
+      <ion-icon class="group-hover:text-primary-content" name="logo-x"></ion-icon>
+    </a>
+  
+
+  
+  
+</div>
+
+        </div>
+      </header>
+
+      <section id="dream-single-post-content" itemprop="articleBody">
+        
+          <img class="w-full z-30" src="proxmox_logo.png" alt="家里云和家庭网络配置教程" />
+        
+
+        <p>本文简述博主的家里云和家庭网络配置，每个部分有单独的文章详细说明，可跳转查看</p>
+<h1 id="服务器配置">服务器配置</h1>
+<h2 id="硬件配置">硬件配置</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">配件</th>
+          <th style="text-align: center">型号</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">CPU</td>
+          <td style="text-align: center">i5-12600KF (10c16t)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">内存</td>
+          <td style="text-align: center">64G (32G * 2)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">固态</td>
+          <td style="text-align: center">1TB</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">机械</td>
+          <td style="text-align: center">8TB (4TB * 2)</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="软件配置">软件配置</h2>
+<p>基于 PVE 虚拟化平台（固态硬盘用于安装系统及虚拟机），PVE 上安装 OpenWrt 和 TrueNAS，OpenWrt 为主路由，TrueNAS 将两块 4T 机械硬盘组建为 ZFS 镜像模式，在确保单盘故障时数据安全的前提下提供 4T 可用存储空间。</p>
+<p>虚拟机的系统安装在固态硬盘上，在 TrueNAS 的存储池中为每一个虚拟机分别创建一个专用的数据集，并将这些数据集共享给对应的虚拟机用于数据存储，Windows 通过 SMB 映射为磁盘，Linux 通过 NFS 映射为磁盘，这样就算固态硬盘出现故障也能保护数据。</p>
+<h1 id="网络配置">网络配置</h1>
+<h2 id="openwrt">OpenWrt</h2>
+
+
+
+  <blockquote class="dream-alert warning">
+    <p class="heading">
+      <ion-icon name="warning-outline"></ion-icon>警告</p>
+    <p>“旁路由”是一种错误的使用方式<br>
+<a href="https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B3%E4%BA%8E%E2%80%9C%E6%97%81%E8%B7%AF%E7%94%B1%E2%80%9D%E7%9A%84%E4%B8%80%E4%BA%9B%E5%90%90%E6%A7%BD" target="_blank">关于“旁路由”的一些吐槽</a>
+</p>
+  </blockquote>
+
+<p>OpenWrt 安装 OpenClash 插件翻墙，按照 <a href="https://github.com/Aethersailor/Custom_OpenClash_Rules" target="_blank">此教程</a>
+进行配置</p>
+<h2 id="无线网络">无线网络</h2>
+<p>服务器的 LAN 口接到交换机，交换机再接到原硬路由作AP使用，将硬路由设置为中继模式</p>
+<h2 id="网段">网段</h2>
+<p>博主按照不同类型的设备区分了网段</p>
+
+
+
+  <blockquote class="dream-alert important">
+    <p class="heading">
+      <ion-icon name="sparkles-outline"></ion-icon>重要</p>
+    <p>如果你也像博主一样区分开网段，请将 OpenWrt 的 LAN 口设置 IPv4 子网掩码为 255.255.0.0，否则无法访问不同网段的设备</p>
+  </blockquote>
+
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">设备类型</th>
+          <th style="text-align: center">网段</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">有线连接(包含虚拟机)</td>
+          <td style="text-align: center">192.168.1.X</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">无线连接</td>
+          <td style="text-align: center">192.168.2.X</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">家电(米家设备等)</td>
+          <td style="text-align: center">192.168.3.X</td>
+      </tr>
+  </tbody>
+</table>
+
+        
+      </section>
+
+      
+      <div class="divider"></div>
+      <div class="flex flex-col md:flex-row justify-between gap-4 py-4">
+        
+        <div></div>
+        
+
+        
+        <div></div>
+        
+      </div>
+      
+
+      
+      <div class="divider"></div>
+
+      <section class="space-y-4">
+        
+
+
+<template x-if="['localhost', '127.0.0.1'].indexOf(window.location.hostname) == -1">
+  <article>
+    <script
+      src="https://utteranc.es/client.js"
+      repo="DongShaoNB/MyBlog"
+      issue-term="og:title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </article>
+</template>
+
+
+
+
+
+
+
+
+      </section>
+      
+    </article>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-col lg:items-end">
+    
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#硬件配置">硬件配置</a></li>
+    <li><a href="#软件配置">软件配置</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#openwrt">OpenWrt</a></li>
+    <li><a href="#无线网络">无线网络</a></li>
+    <li><a href="#网段">网段</a></li>
+  </ul>
+</nav>
+    
+  </div>
+</div>
+
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>
+    © 2024 - 2025 DongShaoNB&#39;s Blog
+  </p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+        <div class="back">
+          <div class="container">
+            
+            <div class="dream-grid dream-grid-about">
+  
+  
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">关于我（About Me）</div>
+
+        <div class="prose dark:prose-invert">
+          <p>Hello，欢迎来到 <strong>DongShaoNB</strong> 的博客，你可以叫我 <strong>东少</strong>。</p>
+<p>我目前大学在读，喜欢写代码和折腾黑科技，我会在我的博客上分享一些代码技巧、黑科技教程等等，我的目标是成为一名优秀的开发者。</p>
+
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">我的项目（My Projects）</div>
+
+        <div class="prose dark:prose-invert">
+          <ul>
+<li>
+<p><a href="https://github.com/DongShaoNB/BedrockPlayerSupport" target="_blank">BedrockPlayerSupport</a>
+</p>
+<p>一个我的世界服务器插件，旨在改善基岩版玩家体验，让其他插件对基岩版玩家更加友好</p>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">知识共享（Creative Commons）</div>
+
+        <div class="prose dark:prose-invert">
+          <p>此网站的所有内容都遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank">CC BY-NC-SA 4.0</a>
+</p>
+<p>All contents of this website are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank">CC BY-NC-SA 4.0</a>
+</p>
+
+        </div>
+      </div>
+    </article>
+  </div>
+  
+  
+
+  
+  <div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4 dream-column">
+    <article
+      class="card card-compact bg-base-100 hover:bg-base-content/10 shadow-xl dark:border dark:border-base-content/30"
+    >
+      <div class="card-body">
+        <div class="card-title">社交链接</div>
+
+        <ul class="menu menu-horizontal flex-wrap w-full px-0 [&_ion-icon]:text-lg">
+  
+  <li>
+    <a href="mailto:i@dsnb.cc" title="Email">
+      <ion-icon name="mail"></ion-icon>
+    </a>
+  </li>
+  
+
+  
+  <li>
+    <a href="https://github.com/DongShaoNB" target="_blank" title="GitHub">
+      <ion-icon name="logo-github"></ion-icon>
+    </a>
+  </li>
+  
+  <li>
+    <a href="https://x.com/DongShaoNB" target="_blank" title="X">
+      <ion-icon name="logo-x"></ion-icon>
+    </a>
+  </li>
+  
+</ul>
+
+      </div>
+    </article>
+  </div>
+  
+
+  
+</div>
+
+            
+
+            
+<footer class="flex justify-between items-center gap-2 px-4 py-12">
+
+  <div>
+  
+  <p>
+    © 2024 - 2025 DongShaoNB&#39;s Blog
+  </p>
+  
+
+  
+  <p class="text-sm">
+    🌱
+    <span class="text-base-content/60">
+      Powered by <a class="hover:underline" href="https://gohugo.io/" target="_blank">Hugo</a> with theme
+      <a class="hover:underline" href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</span
+    >
+  </p>
+  
+</div>
+
+  <div
+  x-data="{ icons: [
+    { name: 'moon', status: 'y' },
+    { name: 'sunny', status: 'n' },
+    { name: 'desktop', status: 'auto' }
+  ] }"
+  class="flex items-center gap-2 h-[32px] px-2 bg-base-100 border border-base-content/30 rounded-full"
+>
+  <template x-for="icon in icons">
+    <div
+      role="button"
+      tabindex="0"
+      :aria-label="'Select ' + icon.name + ' mode'"
+      class="group inline-flex justify-center items-center p-1 rounded-full cursor-pointer hover:bg-primary"
+      :class="$store.darkMode.icon() === icon.name && 'bg-primary'"
+      @click="$store.darkMode.toggle(icon.status)"
+    >
+      <ion-icon
+        :name="`${icon.name}-outline`"
+        class="group-hover:text-primary-content"
+        :class="$store.darkMode.icon() === icon.name && 'text-primary-content'"
+      >
+      </ion-icon>
+    </div>
+  </template>
+</div>
+
+</footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+  window.lightTheme = "emerald"
+  window.darkTheme = "forest"
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+
+  
+  
+  <script src="/js/grid.js"></script>
+
+
+
+
+<script src="/js/main.js"></script>
+
+    
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/luxon@1.26.0"
+  integrity="sha256-4sbTzmCCW9LGrIh5OsN8V5Pfdad1F1MwhLAOyXKnsE0="
+  crossorigin="anonymous"
+></script>
+<script>
+  format()
+
+  function format() {
+    document.querySelectorAll('span[data-format="luxon"]').forEach(el => {
+      const date = el.textContent
+
+      el.textContent = luxon.DateTime.fromISO(date, { locale: "zh" }).toFormat("yyyy年MM月dd日")
+    })
+  }
+</script>
+
+
+
+<script>
+  window.customSyntaxHighlighting = {
+    light: "/css/syntax-light.min.css",
+    dark: "/css/syntax-dark.min.css"
+  }
+
+  document.addEventListener('alpine:initialized', () => {
+    var isDark = Alpine.store('darkMode').isDark()
+    var customSyntaxHighlightingUrl = isDark ? window.customSyntaxHighlighting.dark : window.customSyntaxHighlighting.light
+
+    document
+      .querySelector('link[data-custom-syntax-highlighting]')
+      .setAttribute('href', customSyntaxHighlightingUrl)
+  })
+</script>
+
+
+
+  
+    <script type="module">
+      import mediumZoom from 'https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/+esm';
+      mediumZoom('#dream-single-post-content img', {
+        background: 'oklch(var(--b1))',
+        margin: 24,
+      })
+    </script>
+  
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

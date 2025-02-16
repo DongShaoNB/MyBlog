@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tag2 on DongShaoNB&#39;s Blog</title>
+    <link>http://localhost:1313/tags/tag2/</link>
+    <description>Recent content in Tag2 on DongShaoNB&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-Hans</language>
+    <lastBuildDate>Sun, 16 Feb 2025 16:41:58 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>家里云和家庭网络配置</title>
+      <link>http://localhost:1313/posts/%E5%AE%B6%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sun, 16 Feb 2025 16:41:58 +0800</pubDate>
+      <guid>http://localhost:1313/posts/%E5%AE%B6%E9%87%8C%E4%BA%91%E5%92%8C%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;p&gt;Cut out summary from your post content here.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
