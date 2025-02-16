@@ -39,10 +39,11 @@ tags:
 # 网络配置
 
 ## OpenWrt
+  
 > [!WARNING]
 > “旁路由”是一种错误的使用方式  
 > [关于“旁路由”的一些吐槽](https://github.com/Aethersailor/Custom_OpenClash_Rules/wiki/%E5%85%B3%E4%BA%8E%E2%80%9C%E6%97%81%E8%B7%AF%E7%94%B1%E2%80%9D%E7%9A%84%E4%B8%80%E4%BA%9B%E5%90%90%E6%A7%BD)
-
+  
 OpenWrt 安装 OpenClash 插件翻墙，按照 [此教程](https://github.com/Aethersailor/Custom_OpenClash_Rules)进行配置
 
 ## 无线网络
@@ -53,7 +54,7 @@ OpenWrt 安装 OpenClash 插件翻墙，按照 [此教程](https://github.com/Ae
 
 > [!IMPORTANT]
 > 如果你也像博主一样区分开网段，请将 OpenWrt 的 LAN 口设置 IPv4 子网掩码为 255.255.0.0，否则无法访问不同网段的设备
-
+  
 | 设备类型 | 网段 |
 | :--: | :--: |
 | 有线连接(包含虚拟机) | 192.168.1.X |
