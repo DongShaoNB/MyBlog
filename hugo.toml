@@ -4,7 +4,7 @@ languageCode = 'zh-Hans'
 title = "DongShaoNB's Blog"
 theme = "dream"
 
-# enableGitInfo = true
+enableGitInfo = true
 enableRobotsTXT = true
 hasCJKLanguage = true
 
