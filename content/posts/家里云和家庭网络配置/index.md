@@ -1,7 +1,7 @@
 ---
 title: 家里云和家庭网络配置教程
 date: 2025-02-16T16:41:58+08:00
-lastmod: 2025-02-16T16:41:58+08:00
+lastmod: 2025-02-17T05:50:50+08:00
 author: DongShaoNB
 # avatar: avatar.jpg
 # authorlink: https://author.site
@@ -23,6 +23,7 @@ tags:
 # 服务器配置
 
 ## 硬件配置
+
 | 配件 | 型号 |
 | :--: | :--: |
 | CPU | i5-12600KF (10c16t) |
@@ -47,9 +48,11 @@ tags:
 OpenWrt 安装 OpenClash 插件翻墙，按照 [此教程](https://github.com/Aethersailor/Custom_OpenClash_Rules)进行配置
 
 ## 无线网络
+
 服务器的 LAN 口接到交换机，交换机再接到原硬路由作AP使用，将硬路由设置为中继模式
 
 ## 网段
+
 博主按照不同类型的设备区分了网段
 
 > [!IMPORTANT]
