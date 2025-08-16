@@ -1,7 +1,7 @@
 ---
-title: "[推荐] Break Build Together"
+title: "我的世界双人解密地图 Break Build Together"
 date: 2025-03-09T16:38:58+08:00
-lastmod: 2025-03-09T16:38:58+08:00
+lastmod: 2025-08-16T17:55:58+08:00
 author: DongShaoNB
 # avatar: avatar.jpg
 # authorlink: https://author.site
@@ -13,15 +13,17 @@ categories:
 tags:
   - 我的世界
   - 我的世界地图
+  - 我的世界双人地图
   - 我的世界Java版
+  - 我的世界Java版地图
   - 烧脑
   - 解谜
   - 推荐
 # nolastmod: true
 ---
- 
-我的世界Java版烧脑解谜地图 Break Build Together
- 
+
+我的世界双人解密地图 Break Build Together
+
 <!--more-->
 
 # 详情
@@ -32,10 +34,10 @@ tags:
 
 ## 要求
 
-| 游戏配置 |   参数详情    |
-| :------: | :-----------: |
-| 游戏版本 |    1.17.1     |
-| 游戏人数 | 正好 2 名玩家 |
+| 游戏配置 | 参数详情 |
+| :------: | :------: |
+| 游戏版本 |  1.17.1  |
+| 游戏人数 |    2     |
 
 ## 下载
 
