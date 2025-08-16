@@ -17,6 +17,10 @@ tags:
 # nolastmod: true
 ---
 
+在 Cloudflare 用成本价注册域名
+
+<!--more-->
+
 > Cloudflare（Cloudflare, Inc.）是一家总部位于旧金山的美国跨国科技企业，以向客户提供基于反向代理的内容分发网络（Content Delivery Network, CDN）及分布式域名解析服务（Distributed Domain Name Server）为主要业务。
 
 传统域名注册商常常通过“首年优惠 + 后续加价”赚取差价，且含各种隐形促销与附加服务。对比之下，Cloudflare 提出“只收取注册局与 ICANN 的批发费用，无任何利润加价”，意味着注册与续费价格保持一致，长期来看更省钱。
