@@ -2,17 +2,15 @@
 title: 按成本价注册域名：Cloudflare 零加价省钱指南
 date: 2025-07-29T20:20:27+08:00
 lastmod: 2025-07-29T20:20:27+08:00
-author: DongShaoNB
 # avatar: avatar.jpg
 # authorlink: https://author.site
 cover: cover.png
-images:
-  - cover.png
+# images:
+#   - cover.png
 categories:
   - 教程
 tags:
   - Cloudflare
-  - Domain
   - 域名
 # nolastmod: true
 ---

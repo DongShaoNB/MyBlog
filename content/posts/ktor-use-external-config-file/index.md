@@ -2,12 +2,11 @@
 title: Ktor 使用外部配置文件
 date: 2025-04-02T19:33:27+08:00
 lastmod: 2025-04-02T19:33:27+08:00
-author: DongShaoNB
 # avatar: avatar.jpg
 # authorlink: https://author.site
 cover: ktor_icon.png
-images:
-  - ktor_icon.png
+# images:
+#   - ktor_icon.png
 categories:
   - 教程
 tags:
@@ -15,8 +14,6 @@ tags:
   - Ktor
 # nolastmod: true
 ---
- 
-如何在 Ktor 中使用外部的配置文件？
  
 <!--more-->
 

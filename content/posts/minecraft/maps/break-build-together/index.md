@@ -1,28 +1,26 @@
 ---
-title: "我的世界双人解密地图 Break Build Together"
+title: "我的世界双人烧脑解密地图 Break Build Together"
 date: 2025-03-09T16:38:58+08:00
 lastmod: 2025-08-16T17:55:58+08:00
 author: DongShaoNB
 # avatar: avatar.jpg
 # authorlink: https://author.site
 cover: cover.webp
-images:
-  - cover.webp
+# images:
+#   - cover.webp
 categories:
   - 我的世界
 tags:
   - 我的世界
   - 我的世界地图
   - 我的世界双人地图
+  - 我的世界解密地图
   - 我的世界Java版
   - 我的世界Java版地图
-  - 烧脑
-  - 解谜
-  - 推荐
 # nolastmod: true
 ---
 
-我的世界双人解密地图 Break Build Together
+非常烧脑的双人解密地图，只利用我的世界最基本的机制
 
 <!--more-->
 
