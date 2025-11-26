@@ -5,9 +5,9 @@ lastmod: 2025-08-16T17:55:58+08:00
 author: DongShaoNB
 # avatar: avatar.jpg
 # authorlink: https://author.site
-cover: game.webp
+cover: cover.webp
 images:
-  - game.webp
+  - cover.webp
 categories:
   - 我的世界
 tags:
