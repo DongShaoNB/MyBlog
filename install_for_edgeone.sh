@@ -7,5 +7,5 @@ NUM=${VER#v}
 curl -L -o hugo.tar.gz https://github.com/gohugoio/hugo/releases/download/${VER}/hugo_extended_${NUM}_Linux-64bit.tar.gz
 
 tar -xzf hugo.tar.gz
+
 chmod +x hugo
-mv hugo /usr/local/bin/
